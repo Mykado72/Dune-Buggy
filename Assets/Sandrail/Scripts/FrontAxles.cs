@@ -33,8 +33,18 @@ public class FrontAxles : MonoBehaviour
 	public Transform pivotSteeringArm_L;
 	public Transform steeringArm_R;
 	public Transform pivotSteeringArm_R;
-	//
-	public Transform shockLower_L;
+    //
+    public Transform fixationSuspInfR;
+    public Transform fixationSuspInfL;
+    public Transform meshSuspInfR;
+    public Transform meshSuspInfL;
+    public Transform fixationSuspSupR;
+    public Transform fixationSuspSupL;
+    public Transform meshSuspSupR;
+    public Transform meshSuspSupL;
+
+
+    public Transform shockLower_L;
 	public Transform shockLower_L_Angle;
 	public Transform shockLower_R;
 	public Transform shockLower_R_Angle;
@@ -150,10 +160,14 @@ public class FrontAxles : MonoBehaviour
 		suspensionAngle_L = (Mathf.Atan2 ((suspensionCompressionLeft + -0.6262f) * -1.0f, 0.0727f)) * Mathf.Rad2Deg;
 		suspensionAngle_R = (Mathf.Atan2 ((suspensionCompressionRight + -0.6262f) * 1.0f, 0.0727f)) * Mathf.Rad2Deg;
 
-		// shockLower_L.localRotation = Quaternion.Euler (0.0f, 0.0f, (axlePivotAngle_L * -0.875f) + suspensionAngle_L);
-		// shockLower_R.localRotation = Quaternion.Euler (0.0f, 0.0f, shockLower_R_Angle.rotation.z+(axlePivotAngle_R * 0.875f) + suspensionAngle_R);
-		shockLower_R.localRotation = Quaternion.Euler (0.0f, 0.0f, -(axlePivotAngle_R * 2.875f) + suspensionAngle_R);
-		// shockUpper_L.localRotation = Quaternion.Euler (0.0f, 0.0f, (axlePivotAngle_L * 0.1f) + suspensionAngle_L);
-		// shockUpper_R.localRotation = Quaternion.Euler (0.0f, 0.0f, shockUpper_R_Angle.rotation.z+(axlePivotAngle_R * 0.9f) + suspensionAngle_R);
-	}
+        var rotation = Quaternion.LookRotation(fixationSuspSupR.position - meshSuspInfR.position);
+        // meshSuspInfR.l
+        meshSuspInfR.rotation = rotation;
+
+        // shockLower_L.localRotation = Quaternion.Euler (0.0f, 0.0f, (axlePivotAngle_L * -0.875f) + suspensionAngle_L);
+        // shockLower_R.localRotation = Quaternion.Euler (0.0f, 0.0f, shockLower_R_Angle.rotation.z+(axlePivotAngle_R * 0.875f) + suspensionAngle_R);
+        // shockLower_R.localRotation = Quaternion.Euler (0.0f, 0.0f, -(axlePivotAngle_R * 2.875f) + suspensionAngle_R);
+        // shockUpper_L.localRotation = Quaternion.Euler (0.0f, 0.0f, (axlePivotAngle_L * 0.1f) + suspensionAngle_L);
+        // shockUpper_R.localRotation = Quaternion.Euler (0.0f, 0.0f, shockUpper_R_Angle.rotation.z+(axlePivotAngle_R * 0.9f) + suspensionAngle_R);
+    }
 }
